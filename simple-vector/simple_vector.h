@@ -5,9 +5,8 @@
 #include <cassert>
 #include <initializer_list>
 #include <stdexcept>
-
-#include <utility>
 #include <algorithm>
+#include <utility>
 
 class ReserveProxyObj
 {
@@ -16,7 +15,7 @@ public:
         : capacity_to_reserve_(capacity_to_reserve)
     {
     }
-    size_t GetCapscityToReserve()
+    size_t GetCapacityToReserve()
     {
         return capacity_to_reserve_;
     }
@@ -170,7 +169,7 @@ SimpleVector<Type>::SimpleVector(std::initializer_list<Type> init)
 
 template<typename Type>
 SimpleVector<Type>::SimpleVector(ReserveProxyObj reserve)
-    : simple_vector_(ArrayPtr<Type>(reserve.GetCapscityToReserve())), capacity_(reserve.GetCapscityToReserve())
+    : simple_vector_(ArrayPtr<Type>(reserve.GetCapacityToReserve())), capacity_(reserve.GetCapacityToReserve())
 {
 }
 
@@ -327,6 +326,7 @@ inline void SimpleVector<Type>::PushBack(Type&& item)
 template<typename Type>
 typename SimpleVector<Type>::Iterator SimpleVector<Type>::Insert(ConstIterator pos, const Type& value)
 {
+    assert(end() - pos >= 0);
     size_t insert_index = pos - begin();
     if (size_ < capacity_)
     {
@@ -352,6 +352,7 @@ typename SimpleVector<Type>::Iterator SimpleVector<Type>::Insert(ConstIterator p
 template<typename Type>
 typename SimpleVector<Type>::Iterator SimpleVector<Type>::Insert(ConstIterator pos, Type&& value)
 {
+    assert(end() - pos >= 0);
     size_t insert_index = pos - begin();
     if (size_ < capacity_)
     {
@@ -377,12 +378,14 @@ typename SimpleVector<Type>::Iterator SimpleVector<Type>::Insert(ConstIterator p
 template<typename Type>
 void SimpleVector<Type>::PopBack() noexcept
 {
+    assert(size_ > 0);
     --size_;
 }
 
 template<typename Type>
 typename SimpleVector<Type>::Iterator SimpleVector<Type>::Erase(ConstIterator pos)
 {
+    assert(end() - pos > 0);
     size_t erase_index = pos - begin();
     std::move(begin() + erase_index + 1, end(), begin() + erase_index);
     --size_;
