@@ -326,7 +326,10 @@ inline void SimpleVector<Type>::PushBack(Type&& item)
 template<typename Type>
 typename SimpleVector<Type>::Iterator SimpleVector<Type>::Insert(ConstIterator pos, const Type& value)
 {
-    assert(end() - pos >= 0);
+    if ((pos < begin()) || pos > end())
+    {
+        throw std::invalid_argument("Bad position");
+    }
     size_t insert_index = pos - begin();
     if (size_ < capacity_)
     {
@@ -352,7 +355,10 @@ typename SimpleVector<Type>::Iterator SimpleVector<Type>::Insert(ConstIterator p
 template<typename Type>
 typename SimpleVector<Type>::Iterator SimpleVector<Type>::Insert(ConstIterator pos, Type&& value)
 {
-    assert(end() - pos >= 0);
+    if ((pos < begin()) || pos > end())
+    {
+        throw std::invalid_argument("Bad position");
+    }
     size_t insert_index = pos - begin();
     if (size_ < capacity_)
     {
@@ -385,7 +391,10 @@ void SimpleVector<Type>::PopBack() noexcept
 template<typename Type>
 typename SimpleVector<Type>::Iterator SimpleVector<Type>::Erase(ConstIterator pos)
 {
-    assert(end() - pos > 0);
+    if ((pos < begin()) || pos >= end())
+    {
+        throw std::invalid_argument("Bad position");
+    }
     size_t erase_index = pos - begin();
     std::move(begin() + erase_index + 1, end(), begin() + erase_index);
     --size_;
