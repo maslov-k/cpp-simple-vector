@@ -8,7 +8,7 @@
 using namespace std;
 
 void Test1() {
-    // Инициализация конструктором по умолчанию
+    // РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂРѕРј РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
     {
         SimpleVector<int> v;
         assert(v.GetSize() == 0u);
@@ -16,7 +16,7 @@ void Test1() {
         assert(v.GetCapacity() == 0u);
     }
 
-    // Инициализация вектора указанного размера
+    // РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РІРµРєС‚РѕСЂР° СѓРєР°Р·Р°РЅРЅРѕРіРѕ СЂР°Р·РјРµСЂР°
     {
         SimpleVector<int> v(5);
         assert(v.GetSize() == 5u);
@@ -27,7 +27,7 @@ void Test1() {
         }
     }
 
-    // Инициализация вектора, заполненного заданным значением
+    // РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РІРµРєС‚РѕСЂР°, Р·Р°РїРѕР»РЅРµРЅРЅРѕРіРѕ Р·Р°РґР°РЅРЅС‹Рј Р·РЅР°С‡РµРЅРёРµРј
     {
         SimpleVector<int> v(3, 42);
         assert(v.GetSize() == 3);
@@ -37,7 +37,7 @@ void Test1() {
         }
     }
 
-    // Инициализация вектора при помощи initializer_list
+    // РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РІРµРєС‚РѕСЂР° РїСЂРё РїРѕРјРѕС‰Рё initializer_list
     {
         SimpleVector<int> v{ 1, 2, 3 };
         assert(v.GetSize() == 3);
@@ -45,22 +45,22 @@ void Test1() {
         assert(v[2] == 3);
     }
 
-    // Доступ к элементам при помощи At
+    // Р”РѕСЃС‚СѓРї Рє СЌР»РµРјРµРЅС‚Р°Рј РїСЂРё РїРѕРјРѕС‰Рё At
     {
         SimpleVector<int> v(3);
         assert(&v.At(2) == &v[2]);
         try {
             v.At(3);
-            assert(false);  // Ожидается выбрасывание исключения
+            assert(false);  // РћР¶РёРґР°РµС‚СЃСЏ РІС‹Р±СЂР°СЃС‹РІР°РЅРёРµ РёСЃРєР»СЋС‡РµРЅРёСЏ
         }
         catch (const std::out_of_range&) {
         }
         catch (...) {
-            assert(false);  // Не ожидается исключение, отличное от out_of_range
+            assert(false);  // РќРµ РѕР¶РёРґР°РµС‚СЃСЏ РёСЃРєР»СЋС‡РµРЅРёРµ, РѕС‚Р»РёС‡РЅРѕРµ РѕС‚ out_of_range
         }
     }
 
-    // Очистка вектора
+    // РћС‡РёСЃС‚РєР° РІРµРєС‚РѕСЂР°
     {
         SimpleVector<int> v(10);
         const size_t old_capacity = v.GetCapacity();
@@ -69,7 +69,7 @@ void Test1() {
         assert(v.GetCapacity() == old_capacity);
     }
 
-    // Изменение размера
+    // РР·РјРµРЅРµРЅРёРµ СЂР°Р·РјРµСЂР°
     {
         SimpleVector<int> v(3);
         v[2] = 17;
@@ -100,16 +100,16 @@ void Test1() {
         assert(v[3] == 0);
     }
 
-    // Итерирование по SimpleVector
+    // РС‚РµСЂРёСЂРѕРІР°РЅРёРµ РїРѕ SimpleVector
     {
-        // Пустой вектор
+        // РџСѓСЃС‚РѕР№ РІРµРєС‚РѕСЂ
         {
             SimpleVector<int> v;
             assert(v.begin() == nullptr);
             assert(v.end() == nullptr);
         }
 
-        // Непустой вектор
+        // РќРµРїСѓСЃС‚РѕР№ РІРµРєС‚РѕСЂ
         {
             SimpleVector<int> v(10, 42);
             assert(v.begin());
@@ -130,7 +130,7 @@ void Test2() {
         assert(v[1] == 42);
     }
 
-    // Если хватает места, PushBack не увеличивает Capacity
+    // Р•СЃР»Рё С…РІР°С‚Р°РµС‚ РјРµСЃС‚Р°, PushBack РЅРµ СѓРІРµР»РёС‡РёРІР°РµС‚ Capacity
     {
         SimpleVector<int> v(2);
         v.Resize(1);
@@ -151,7 +151,7 @@ void Test2() {
         assert((v == SimpleVector<int>{0, 1, 2}));
     }
 
-    // Конструктор копирования
+    // РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РєРѕРїРёСЂРѕРІР°РЅРёСЏ
     {
         SimpleVector<int> numbers{ 1, 2 };
         auto numbers_copy(numbers);
@@ -163,7 +163,7 @@ void Test2() {
         }
     }
 
-    // Сравнение
+    // РЎСЂР°РІРЅРµРЅРёРµ
     {
         assert((SimpleVector{ 1, 2, 3 } == SimpleVector{ 1, 2, 3 }));
         assert((SimpleVector{ 1, 2, 3 } != SimpleVector{ 1, 2, 2 }));
@@ -177,7 +177,7 @@ void Test2() {
         assert((SimpleVector{ 1, 2, 3 } <= SimpleVector{ 1, 2, 4 }));
     }
 
-    // Обмен значений векторов
+    // РћР±РјРµРЅ Р·РЅР°С‡РµРЅРёР№ РІРµРєС‚РѕСЂРѕРІ
     {
         SimpleVector<int> v1{ 42, 666 };
         SimpleVector<int> v2;
@@ -203,7 +203,7 @@ void Test2() {
         assert(v2.GetCapacity() == capacity1);
     }
 
-    // Присваивание
+    // РџСЂРёСЃРІР°РёРІР°РЅРёРµ
     {
         SimpleVector<int> src_vector{ 1, 2, 3, 4 };
         SimpleVector<int> dst_vector{ 1, 2, 3, 4, 5, 6 };
@@ -211,14 +211,14 @@ void Test2() {
         assert(dst_vector == src_vector);
     }
 
-    // Вставка элементов
+    // Р’СЃС‚Р°РІРєР° СЌР»РµРјРµРЅС‚РѕРІ
     {
         SimpleVector<int> v{ 1, 2, 3, 4 };
         v.Insert(v.begin() + 2, 42);
         assert((v == SimpleVector<int>{1, 2, 42, 3, 4}));
     }
 
-    // Удаление элементов
+    // РЈРґР°Р»РµРЅРёРµ СЌР»РµРјРµРЅС‚РѕРІ
     {
         SimpleVector<int> v{ 1, 2, 3, 4 };
         v.Erase(v.cbegin() + 2);
@@ -239,26 +239,26 @@ void TestReserveMethod()
 {
     cout << "TestReserveMethod"s << endl;
     SimpleVector<int> v;
-    // зарезервируем 5 мест в векторе
+    // Р·Р°СЂРµР·РµСЂРІРёСЂСѓРµРј 5 РјРµСЃС‚ РІ РІРµРєС‚РѕСЂРµ
     v.Reserve(5);
     assert(v.GetCapacity() == 5);
     assert(v.IsEmpty());
 
-    // попытаемся уменьшить capacity до 1
+    // РїРѕРїС‹С‚Р°РµРјСЃСЏ СѓРјРµРЅСЊС€РёС‚СЊ capacity РґРѕ 1
     v.Reserve(1);
-    // capacity должно остаться прежним
+    // capacity РґРѕР»Р¶РЅРѕ РѕСЃС‚Р°С‚СЊСЃСЏ РїСЂРµР¶РЅРёРј
     assert(v.GetCapacity() == 5);
-    // поместим 10 элементов в вектор
+    // РїРѕРјРµСЃС‚РёРј 10 СЌР»РµРјРµРЅС‚РѕРІ РІ РІРµРєС‚РѕСЂ
     for (int i = 0; i < 10; ++i) {
         v.PushBack(i);
     }
     assert(v.GetSize() == 10);
-    // увеличим capacity до 100
+    // СѓРІРµР»РёС‡РёРј capacity РґРѕ 100
     v.Reserve(100);
-    // проверим, что размер не поменялся
+    // РїСЂРѕРІРµСЂРёРј, С‡С‚Рѕ СЂР°Р·РјРµСЂ РЅРµ РїРѕРјРµРЅСЏР»СЃСЏ
     assert(v.GetSize() == 10);
     assert(v.GetCapacity() == 100);
-    // проверим, что элементы на месте
+    // РїСЂРѕРІРµСЂРёРј, С‡С‚Рѕ СЌР»РµРјРµРЅС‚С‹ РЅР° РјРµСЃС‚Рµ
     for (int i = 0; i < 10; ++i) {
         assert(v[i] == i);
     }
@@ -380,15 +380,15 @@ void TestNoncopiableInsert() {
         v.PushBack(X(i));
     }
 
-    // в начало
+    // РІ РЅР°С‡Р°Р»Рѕ
     v.Insert(v.begin(), X(size + 1));
     assert(v.GetSize() == size + 1);
     assert(v.begin()->GetX() == size + 1);
-    // в конец
+    // РІ РєРѕРЅРµС†
     v.Insert(v.end(), X(size + 2));
     assert(v.GetSize() == size + 2);
     assert((v.end() - 1)->GetX() == size + 2);
-    // в середину
+    // РІ СЃРµСЂРµРґРёРЅСѓ
     v.Insert(v.begin() + 3, X(size + 3));
     assert(v.GetSize() == size + 3);
     assert((v.begin() + 3)->GetX() == size + 3);
